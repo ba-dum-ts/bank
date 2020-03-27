@@ -6,90 +6,69 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class insertMoney extends JPanel {
-    static JTextField textBox1 = new JTextField();
-    static JLabel label1 = new JLabel();
+    static JButton logOut = new JButton();
+    static JTextField incomeField = new JTextField();
+    static JLabel label = new JLabel();
     static boolean loop;
 
     insertMoney(){
         this.setLayout(null);
 
-        this.add(label1);
-        this.add(textBox1);
+        this.add(label);
+        this.add(incomeField);
 
         menu();
+        logout();
     }
 
-    public void menu(){
-        label1.setBounds(210, 160, 500, 23);
-        label1.setText("What amount do you wish to insert to your account:");
-        label1.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-        label1.setHorizontalAlignment(SwingConstants.CENTER);
-        label1.setVerticalAlignment(SwingConstants.CENTER);
+    public void menu(){ // hur mycket användaren väljer att lägga till
+        label.setBounds(210, 160, 500, 23);
+        label.setText("What amount do you wish to insert to your account:");
+        label.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setVerticalAlignment(SwingConstants.CENTER);
 
-        textBox1.setBounds(350, 200, 200, 23);
-        textBox1.setText(Double.toString(afterLogin.amount));
-        textBox1.setHorizontalAlignment(SwingConstants.CENTER);
+        incomeField.setBounds(350, 200, 200, 23);
+        incomeField.setText(Double.toString(afterLogin.income));
+        incomeField.setHorizontalAlignment(SwingConstants.CENTER);
 
-        textBox1.addMouseListener(new MouseAdapter() {
+        incomeField.addMouseListener(new MouseAdapter() { // tömmer ruta
             public void mouseClicked(MouseEvent e) {
-                textBox1.setText("");
+                incomeField.setText("");
             }
         });
-        textBox1.addActionListener(new ActionListener() {
+        incomeField.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 loop = true;
                 while(loop){
-                    if(Double.parseDouble(textBox1.getText()) > 0){
+                    if(Double.parseDouble(incomeField.getText()) >= 0){ // om antalet användaren skriver är mer eller lika med noll
                         loop = false;
 
-                        afterLogin.amount = Double.parseDouble(textBox1.getText());
+                        afterLogin.income = afterLogin.income + Double.parseDouble(incomeField.getText()); // ändrar antalet inkomst
 
-                        MAIN.changePanel(MAIN.login);
-                        afterLogin.textBox1.setText(Double.toString(afterLogin.amount));
+                        MAIN.changePanel(MAIN.login); // tar tillbaka till menyn
+                        afterLogin.incomeField.setText(Double.toString(afterLogin.income)); // ändrar totala inkomst  till det nya inkomst
                     }
 
-                    else if(Double.parseDouble(textBox1.getText()) == 0){
-                        label1.setText("You sure you don't want to insert anything?");
-                        textBox1.setText("Answer \"yes\" or \"no\"");
-                        textBox1.addMouseListener(new MouseAdapter() {
-                            public void mouseClicked(MouseEvent e) {
-                                textBox1.setText("");
-                            }
-                        });
-                        textBox1.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e) {
-                                boolean loopAgain = true;
-                                while(loopAgain){
-                                    if(textBox1.getText().equalsIgnoreCase("yes")){
-                                        loop = false;
-                                        loopAgain = false;
-                                        MAIN.changePanel(MAIN.login);
-                                    }
-                                    else if(textBox1.getText().equalsIgnoreCase("no")){
-                                        loop = true;
-                                        loopAgain = false;
-                                    }
-
-                                    else{
-                                        textBox1.addMouseListener(new MouseAdapter() {
-                                            public void mouseClicked(MouseEvent e) {
-                                                textBox1.setText("");
-                                            }
-                                        });
-
-                                        label1.setText("It's a yes or no question...");
-                                        loopAgain = true;
-                                    }
-                                }
-                            }
-                        });
-                    }
-
-                    else{
-                        label1.setText("You're supposed to insert money...");
+                    else{ // om användaren försöker istället ta bort pengar
+                        label.setText("You're supposed to insert money...");
                         loop = true;
                     }
                 }
+            }
+        });
+    }
+
+    public static void logout() {
+        logOut.setBounds(0, 0, 500, 20);
+        logOut.setText("Logout");
+        logOut.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+        logOut.setVerticalAlignment(SwingConstants.CENTER);
+        logOut.setHorizontalAlignment(SwingConstants.CENTER);
+
+        logOut.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                MAIN.changePanel(MAIN.menu); // tar tillbaka till start menyn
             }
         });
     }

@@ -14,10 +14,8 @@ public class MAIN {
     static insertMoney insert = new insertMoney();
     static extractMoney extract = new extractMoney();
     static List<String[]> accounts = new ArrayList <String[]>();
-    static JLabel label = new JLabel();
-    static Timer timer = new Timer(16, new refreshPanel());
 
-    public static void main(String args[]){
+    public static void main(String args[]){ // här finns basen ur allt. Alltså, ramen samt första panel.
         frame.setVisible(true);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setSize(900, 550);
@@ -25,35 +23,16 @@ public class MAIN {
         frame.add(menu);
         oldPanel = menu;
 
-        label.setText(MouseInfo.getPointerInfo().getLocation().toString());
-        label.setBounds(0, 0, 1000, 20);
-        oldPanel.add(label);
+        createAccount.addAccount("admin", "admin"); // förbered konto så att man inte behöver skapa en
 
-        timer.start();
-
-        frame.validate();
-        frame.repaint();
+        frame.validate(); // uppdaterar panel
     }
 
-    public static void changePanel(JPanel panel){
+    public static void changePanel(JPanel panel){ // tar bort gamla panel och lägger till ny panel
         frame.remove(oldPanel);
         frame.add(panel);
         oldPanel = panel;
 
-        label.setText(MouseInfo.getPointerInfo().getLocation().toString());
-        label.setBounds(0, 0, 100, 20);
-        oldPanel.add(label);
-
-        frame.validate();
-        frame.repaint();
-    }
-
-    static class refreshPanel implements ActionListener{
-        public void actionPerformed(ActionEvent e){
-            label.setText(MouseInfo.getPointerInfo().getLocation().toString());
-
-            frame.validate();
-            frame.repaint();
-        }
+        frame.validate(); // uppdaterar panel
     }
 }

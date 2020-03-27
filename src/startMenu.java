@@ -3,64 +3,64 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class startMenu extends JPanel {
-    static JTextField textBox1 = new JTextField(), textBox2 = new JTextField();
-    static JLabel label1 = new JLabel();
-    static JButton button1 = new JButton(), button2 = new JButton();
+    static JTextField username = new JTextField(), password = new JTextField();
+    static JLabel label = new JLabel();
+    static JButton createAccount = new JButton(), logIn = new JButton();
 
     startMenu(){
         this.setLayout(null);
 
-        this.add(textBox1);
-        this.add(textBox2);
-        this.add(label1);
-        this.add(button1);
-        this.add(button2);
+        this.add(username);
+        this.add(password);
+        this.add(label);
+        this.add(createAccount);
+        this.add(logIn);
 
         menu();
         help();
         finish();
     }
 
-    public static void menu(){
-        label1.setBounds(200, 160, 500, 23);
-        label1.setText("Login:");
-        label1.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-        label1.setHorizontalAlignment(SwingConstants.CENTER);
-        label1.setVerticalAlignment(SwingConstants.CENTER);
+    public static void menu(){ // bevisar att konto existerar
+        label.setBounds(200, 160, 500, 23);
+        label.setText("Login:");
+        label.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setVerticalAlignment(SwingConstants.CENTER);
 
-        textBox1.setBounds(350, 200, 200, 23);
-        textBox1.setText("Username");
+        username.setBounds(350, 200, 200, 23);
+        username.setText("Username");
 
-        textBox2.setBounds(350, 240, 200, 23);
-        textBox2.setText("Password");
-        textBox2.setEditable(false);
+        password.setBounds(350, 240, 200, 23);
+        password.setText("Password");
+        password.setEditable(false);
 
-        textBox1.addMouseListener(new MouseAdapter() {
+        username.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                textBox1.setText("");
+                username.setText("");
             }
-        });
+        }); // tömmer ruta
 
-        textBox1.addActionListener(new ActionListener() {
+        username.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                textBox2.grabFocus();
-                textBox2.setText("");
+                password.grabFocus();
+                password.setText("");
 
-                if(textBox1.getText().length() > 0 && textBox1.getText().length() < 21){
-                    textBox2.setEditable(true);
+                if(username.getText().length() > 0 && username.getText().length() < 21){ // om texten inte är för långt eller kort
+                    password.setEditable(true);
 
-                    textBox2.addActionListener(new ActionListener() {
+                    password.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-                            if(textBox2.getText().length() > 0 && textBox2.getText().length() < 21){
-                                for(int i = 0; i < MAIN.accounts.size(); i++) {
-                                    if (MAIN.accounts.get(i)[0].equalsIgnoreCase(textBox1.getText()) && MAIN.accounts.get(i)[1].equalsIgnoreCase(textBox2.getText())) {
-                                        textBox1.addKeyListener(new KeyListener() {
+                            if(password.getText().length() > 0 && password.getText().length() < 21){ // om texten inte är för långt eller kort
+                                for(int i = 0; i < MAIN.accounts.size(); i++) { // checkar listan med alla konton
+                                    if (MAIN.accounts.get(i)[0].equalsIgnoreCase(username.getText()) && MAIN.accounts.get(i)[1].equalsIgnoreCase(password.getText())) { // om kontot existerar
+                                        username.addKeyListener(new KeyListener() {
                                             public void keyTyped(KeyEvent e) {
 
                                             }
 
                                             public void keyPressed(KeyEvent e) {
-                                                if(e.getKeyCode() == KeyEvent.VK_ENTER && e.getKeyCode() == KeyEvent.VK_TAB){
+                                                if(e.getKeyCode() == KeyEvent.VK_ENTER){
                                                     MAIN.changePanel(MAIN.login);
                                                 }
                                             }
@@ -69,20 +69,20 @@ public class startMenu extends JPanel {
 
                                             }
                                         });
-                                        button2.setEnabled(true);
+                                        logIn.setEnabled(true);
                                     }
 
-                                    else{
-                                        label1.setText("Wrong username or/and password");
+                                    else{ // om kontot inte existerar
+                                        label.setText("Wrong username or/and password");
                                     }
                                 }
                             }
 
                             else{
-                                label1.setText("Enter a password that's 1 to 20 characters long");
-                                textBox2.addMouseListener(new MouseAdapter() {
+                                label.setText("Enter a password that's 1 to 20 characters long");
+                                password.addMouseListener(new MouseAdapter() {
                                     public void mouseClicked(MouseEvent e) {
-                                        textBox2.setText("");
+                                        password.setText("");
                                     }
                                 });
                             }
@@ -91,10 +91,10 @@ public class startMenu extends JPanel {
                 }
 
                 else{
-                    label1.setText("Enter a username that's 1 to 20 characters long");
-                    textBox1.addMouseListener(new MouseAdapter() {
+                    label.setText("Enter a username that's 1 to 20 characters long");
+                    username.addMouseListener(new MouseAdapter() {
                         public void mouseClicked(MouseEvent e) {
-                            textBox1.setText("");
+                            username.setText("");
                         }
                     });
                 }
@@ -102,28 +102,28 @@ public class startMenu extends JPanel {
         });
     }
 
-    public static void help(){
-        button1.setBounds(350, 340, 200, 23);
-        button1.setText("Don't have an account?");
-        button1.setHorizontalAlignment(SwingConstants.CENTER);
-        button1.setVerticalAlignment(SwingConstants.CENTER);
-        button1.addActionListener(new ActionListener(){
+    public static void help(){ // skapar konto
+        createAccount.setBounds(350, 340, 200, 23);
+        createAccount.setText("Don't have an account?");
+        createAccount.setHorizontalAlignment(SwingConstants.CENTER);
+        createAccount.setVerticalAlignment(SwingConstants.CENTER);
+        createAccount.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e){
                 MAIN.changePanel(MAIN.account);
             }
         });
     }
 
-    public static void finish(){
-        button2.setBounds(350, 263, 200, 23);
-        button2.setText("Enter");
-        button2.setHorizontalAlignment(SwingConstants.CENTER);
-        button2.setVerticalAlignment(SwingConstants.CENTER);
-        button2.addActionListener(new ActionListener() {
+    public static void finish(){ // om konto existerar, loggar in
+        logIn.setBounds(350, 263, 200, 23);
+        logIn.setText("Enter");
+        logIn.setHorizontalAlignment(SwingConstants.CENTER);
+        logIn.setVerticalAlignment(SwingConstants.CENTER);
+        logIn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MAIN.changePanel(MAIN.login);
+                MAIN.changePanel(MAIN.login); // loggar in
             }
         });
-        button2.setEnabled(false);
+        logIn.setEnabled(false);
     }
 }

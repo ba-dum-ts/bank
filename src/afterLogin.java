@@ -3,56 +3,71 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class afterLogin extends JPanel{
-    static JTextField textBox1 = new JTextField();
-    static JLabel label1 = new JLabel();
-    static JButton button1 = new JButton(), button2 = new JButton();
-    static double amount = 0.0;
+public class afterLogin extends JPanel {
+    static JTextField incomeField = new JTextField();
+    static JLabel label = new JLabel();
+    static JButton addMoney = new JButton(), substractMoney = new JButton(), logOut = new JButton();
+    static double income = 0.0;
 
     afterLogin(){
         this.setLayout(null);
 
-        this.add(label1);
-        this.add(textBox1);
-        this.add(button1);
-        this.add(button2);
+        this.add(label);
+        this.add(incomeField);
+        this.add(addMoney);
+        this.add(substractMoney);
 
         menu();
+        logout();
     }
 
-    public static void menu(){
-        label1.setBounds(350, 160, 200, 23);
-        label1.setText("Income:");
-        label1.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-        label1.setHorizontalAlignment(SwingConstants.CENTER);
-        label1.setVerticalAlignment(SwingConstants.CENTER);
+    public static void menu(){ // lägga till pengar eller ta bort pengar
+        label.setBounds(350, 160, 200, 23);
+        label.setText("Income:");
+        label.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setVerticalAlignment(SwingConstants.CENTER);
 
-        textBox1.setBounds(350, 200, 200, 23);
-        textBox1.setText(Double.toString(amount));
-        textBox1.setHorizontalAlignment(SwingConstants.CENTER);
-        textBox1.setEditable(false);
+        incomeField.setBounds(350, 200, 200, 23);
+        incomeField.setText(Double.toString(income));
+        incomeField.setHorizontalAlignment(SwingConstants.CENTER);
+        incomeField.setEditable(false);
 
-        button1.setBounds(250, 250, 150, 30);
-        button1.setText("Insert money");
-        button1.setFont(new Font("TimesRoman", Font.PLAIN, 14));
-        button1.setVerticalAlignment(SwingConstants.CENTER);
-        button1.setHorizontalAlignment(SwingConstants.CENTER);
-        button1.setBackground(Color.green);
-        button1.addActionListener(new ActionListener() {
+        addMoney.setBounds(250, 250, 150, 30);
+        addMoney.setText("Insert money");
+        addMoney.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+        addMoney.setVerticalAlignment(SwingConstants.CENTER);
+        addMoney.setHorizontalAlignment(SwingConstants.CENTER);
+        addMoney.setBackground(Color.green);
+        addMoney.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MAIN.changePanel(MAIN.insert);
+                MAIN.changePanel(MAIN.insert); // tar användaren till panelen där det läggs till pengar
             }
         });
 
-        button2.setBounds(490, 250, 150, 30);
-        button2.setText("Extract money");
-        button2.setFont(new Font("TimesRoman", Font.PLAIN, 14));
-        button2.setVerticalAlignment(SwingConstants.CENTER);
-        button2.setHorizontalAlignment(SwingConstants.CENTER);
-        button2.setBackground(Color.red);
-        button2.addActionListener(new ActionListener() {
+        substractMoney.setBounds(490, 250, 150, 30);
+        substractMoney.setText("Extract money");
+        substractMoney.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+        substractMoney.setVerticalAlignment(SwingConstants.CENTER);
+        substractMoney.setHorizontalAlignment(SwingConstants.CENTER);
+        substractMoney.setBackground(Color.red);
+        substractMoney.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                MAIN.changePanel(MAIN.extract);
+                MAIN.changePanel(MAIN.extract); // tar användaren till panelen där det tas bort pengar
+            }
+        });
+    }
+
+    public static void logout() {
+        logOut.setBounds(0, 0, 500, 20);
+        logOut.setText("Logout");
+        logOut.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+        logOut.setVerticalAlignment(SwingConstants.CENTER);
+        logOut.setHorizontalAlignment(SwingConstants.CENTER);
+
+        logOut.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                MAIN.changePanel(MAIN.menu); // tar tillbaka till start menyn
             }
         });
     }
