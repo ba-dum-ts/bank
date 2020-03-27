@@ -6,7 +6,7 @@ import java.awt.event.ActionListener;
 public class afterLogin extends JPanel {
     static JTextField incomeField = new JTextField();
     static JLabel label = new JLabel();
-    static JButton addMoney = new JButton(), substractMoney = new JButton(), logOut = new JButton();
+    static JButton addMoney = new JButton(), subtractMoney = new JButton(), logOut = new JButton();
     static double income = 0.0;
 
     afterLogin(){
@@ -15,7 +15,7 @@ public class afterLogin extends JPanel {
         this.add(label);
         this.add(incomeField);
         this.add(addMoney);
-        this.add(substractMoney);
+        this.add(subtractMoney);
         this.add(logOut);
 
         menu();
@@ -46,13 +46,13 @@ public class afterLogin extends JPanel {
             }
         });
 
-        substractMoney.setBounds(490, 250, 150, 30);
-        substractMoney.setText("Extract money");
-        substractMoney.setFont(new Font("TimesRoman", Font.PLAIN, 14));
-        substractMoney.setVerticalAlignment(SwingConstants.CENTER);
-        substractMoney.setHorizontalAlignment(SwingConstants.CENTER);
-        substractMoney.setBackground(Color.red);
-        substractMoney.addActionListener(new ActionListener() {
+        subtractMoney.setBounds(490, 250, 150, 30);
+        subtractMoney.setText("Extract money");
+        subtractMoney.setFont(new Font("TimesRoman", Font.PLAIN, 14));
+        subtractMoney.setVerticalAlignment(SwingConstants.CENTER);
+        subtractMoney.setHorizontalAlignment(SwingConstants.CENTER);
+        subtractMoney.setBackground(Color.red);
+        subtractMoney.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 MAIN.changePanel(MAIN.extract); // tar användaren till panelen där det tas bort pengar
             }
