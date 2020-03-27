@@ -25,7 +25,8 @@ public class MAIN {
 
         createAccount.addAccount("admin", "admin"); // förbered konto så att man inte behöver skapa en
 
-        frame.validate(); // uppdaterar panel
+        frame.validate(); // uppdaterar position på funktioner
+        frame.repaint(); // uppdaterar gui
     }
 
     public static void changePanel(JPanel panel){ // tar bort gamla panel och lägger till ny panel
@@ -33,6 +34,7 @@ public class MAIN {
         frame.add(panel);
         oldPanel = panel;
 
-        frame.validate(); // uppdaterar panel
+        frame.validate(); // uppdaterar position på funktioner
+        frame.repaint(); // uppdaterar gui
     }
 }
