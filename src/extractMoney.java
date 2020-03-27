@@ -6,7 +6,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class extractMoney extends JPanel{
-    static JButton logOut = new JButton();
     static JTextField incomeField = new JTextField();
     static JLabel label = new JLabel();
     static boolean loop;
@@ -18,7 +17,6 @@ public class extractMoney extends JPanel{
         this.add(incomeField);
 
         menu();
-        logout();
     }
 
     public void menu(){ // hur mycket användaren väljer att ta bort
@@ -61,20 +59,6 @@ public class extractMoney extends JPanel{
                         label.setText("You're supposed to extract money...");
                     }
                 }
-            }
-        });
-    }
-
-    public static void logout() {
-        logOut.setBounds(0, 0, 500, 20);
-        logOut.setText("Logout");
-        logOut.setFont(new Font("TimesRoman", Font.PLAIN, 14));
-        logOut.setVerticalAlignment(SwingConstants.CENTER);
-        logOut.setHorizontalAlignment(SwingConstants.CENTER);
-
-        logOut.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                MAIN.changePanel(MAIN.menu); // tar tillbaka till start menyn
             }
         });
     }

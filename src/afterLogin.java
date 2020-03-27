@@ -16,6 +16,7 @@ public class afterLogin extends JPanel {
         this.add(incomeField);
         this.add(addMoney);
         this.add(substractMoney);
+        this.add(logOut);
 
         menu();
         logout();
@@ -59,11 +60,12 @@ public class afterLogin extends JPanel {
     }
 
     public static void logout() {
-        logOut.setBounds(0, 0, 500, 20);
+        logOut.setBounds(0, 0, 100, 20);
         logOut.setText("Logout");
         logOut.setFont(new Font("TimesRoman", Font.PLAIN, 14));
         logOut.setVerticalAlignment(SwingConstants.CENTER);
         logOut.setHorizontalAlignment(SwingConstants.CENTER);
+        logOut.setBackground(Color.red);
 
         logOut.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
